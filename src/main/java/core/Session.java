@@ -1,12 +1,11 @@
-
 package core;
 
 import java.io.BufferedWriter;
 import java.io.IOException;
-import java.nio.charset.StandardCharsets;
-import java.nio.file.*;
+import java.nio.file.Path;
 
 public class Session {
+
     private final BufferedWriter out;
     private final Path root;
     private Path cwd = null;
@@ -26,19 +25,40 @@ public class Session {
         out.flush();
     }
 
-    public Path cwd() { return cwd; }
+    public Path cwd() {
+        return cwd;
+    }
+
     public boolean changeDir(Path p) {
         Path np = cwd.resolve(p).normalize();
-        if (!np.toAbsolutePath().startsWith(root)) return false;
+        if (!np.toAbsolutePath().startsWith(root)) {
+            return false;
+        }
         this.cwd = np;
         return true;
     }
 
-    public boolean isAuthed() { return authed; }
-    public void setAuthed(boolean a) { this.authed = a; }
-    public boolean shouldQuit() { return quit; }
-    public void setQuit(boolean q) { this.quit = q; }
+    public boolean isAuthed() {
+        return authed;
+    }
 
-    public String getPendingUser() { return pendingUser; }
-    public void setPendingUser(String u) { this.pendingUser = u; }
+    public void setAuthed(boolean a) {
+        this.authed = a;
+    }
+
+    public boolean shouldQuit() {
+        return quit;
+    }
+
+    public void setQuit(boolean q) {
+        this.quit = q;
+    }
+
+    public String getPendingUser() {
+        return pendingUser;
+    }
+
+    public void setPendingUser(String u) {
+        this.pendingUser = u;
+    }
 }

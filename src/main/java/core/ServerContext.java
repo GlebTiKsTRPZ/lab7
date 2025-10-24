@@ -1,16 +1,14 @@
-
 package core;
 
-import logging.Logging;
-import state.InitializingState;
-import state.ServerState;
-
-import java.net.ServerSocket;
 import java.nio.file.Path;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
+import state.InitializingState;
+import state.ServerState;
+
 public class ServerContext {
+
     private final ServerConfig config;
     private final Path root;
     private final ExecutorService pool = Executors.newCachedThreadPool();
@@ -23,10 +21,21 @@ public class ServerContext {
         this.state.onEnter(this);
     }
 
-    public ServerConfig config(){ return config; }
-    public Path root(){ return root; }
-    public ExecutorService pool(){ return pool; }
-    public ServerState state(){ return state; }
+    public ServerConfig config() {
+        return config;
+    }
+
+    public Path root() {
+        return root;
+    }
+
+    public ExecutorService pool() {
+        return pool;
+    }
+
+    public ServerState state() {
+        return state;
+    }
 
     public void setState(ServerState next) {
         this.state = next;
