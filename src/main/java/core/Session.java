@@ -4,6 +4,9 @@ import java.io.BufferedWriter;
 import java.io.IOException;
 import java.nio.file.Path;
 
+import memento.SessionHistory;
+import memento.SessionMemento;
+
 public class Session {
 
     private final BufferedWriter out;
@@ -12,6 +15,7 @@ public class Session {
     private boolean authed = false;
     private boolean quit = false;
     private String pendingUser = null;
+    private final SessionHistory history = new SessionHistory();
 
     public Session(BufferedWriter out, Path root) {
         this.out = out;
@@ -23,6 +27,31 @@ public class Session {
         out.write(s);
         out.write("\r\n");
         out.flush();
+    }
+
+    public SessionMemento save() {
+        return new SessionMemento(this.cwd, this.authed, this.quit, this.pendingUser);
+    }
+
+    public void restore(SessionMemento m) {
+        if (m == null)
+            return;
+        this.cwd = m.cwd();
+        this.authed = m.authed();
+        this.quit = m.quit();
+        this.pendingUser = m.pendingUser();
+    }
+
+    public void snapshot() {
+        this.history.push(save());
+    }
+
+    public boolean undo() {
+        SessionMemento m = this.history.pop();
+        if (m == null)
+            return false;
+        restore(m);
+        return true;
     }
 
     public Path cwd() {

@@ -6,7 +6,7 @@ public record ServerConfig(int ftpPort, int controlPort, String banner) {
         int p = parse(System.getenv("LAB4_FTP_PORT"), 2123);
         int c = parse(System.getenv("LAB4_CTRL_PORT"), 2124);
         String b = System.getenv("LAB4_BANNER");
-        if (b == null || b.isBlank()) {
+        if (b == null || b.trim().isEmpty()) {
             b = "Lab4 FTP with State";
         }
         return new ServerConfig(p, c, b);

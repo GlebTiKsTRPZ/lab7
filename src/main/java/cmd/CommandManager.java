@@ -16,6 +16,10 @@ public final class CommandManager {
                 new ListCmd(args);
             case "QUIT" ->
                 new QuitCmd(args);
+            case "UNDO" ->
+                new UndoCmd(args);
+            case "SNAP" ->
+                new SnapCmd(args);
             default ->
                 new UnknownCmd(name);
         };
