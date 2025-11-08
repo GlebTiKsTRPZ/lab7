@@ -3,7 +3,7 @@ package cmd;
 import core.Session;
 import protocol.ResponseDirector;
 
-public class UserCmd extends AbstractCommand {
+public class UserCmd extends PublicCommand {
 
     public UserCmd(String args) {
         super(args);

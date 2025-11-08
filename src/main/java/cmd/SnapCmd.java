@@ -3,7 +3,7 @@ package cmd;
 import core.Session;
 import protocol.ResponseDirector;
 
-public final class SnapCmd extends AbstractCommand {
+public final class SnapCmd extends AuthenticatedCommand {
 
     public SnapCmd(String args) {
         super(args);

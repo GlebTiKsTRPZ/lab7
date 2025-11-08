@@ -4,7 +4,7 @@ import core.Session;
 import model.Account;
 import protocol.ResponseDirector;
 
-public class PassCmd extends AbstractCommand {
+public class PassCmd extends PublicCommand {
 
     public PassCmd(String args) {
         super(args);

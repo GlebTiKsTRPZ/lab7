@@ -3,7 +3,7 @@ package cmd;
 import core.Session;
 import protocol.ResponseDirector;
 
-public class PwdCmd extends AbstractCommand {
+public class PwdCmd extends AuthenticatedCommand {
 
     public PwdCmd(String args) {
         super(args);

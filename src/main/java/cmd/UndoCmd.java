@@ -3,7 +3,7 @@ package cmd;
 import core.Session;
 import protocol.ResponseDirector;
 
-public final class UndoCmd extends AbstractCommand {
+public final class UndoCmd extends AuthenticatedCommand {
 
     public UndoCmd(String args) {
         super(args);

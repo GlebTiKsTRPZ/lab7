@@ -2,13 +2,14 @@ package cmd;
 
 import java.io.IOException;
 import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.List;
 import java.util.stream.Collectors;
 
 import core.Session;
 import protocol.ResponseDirector;
 
-public class ListCmd extends AbstractCommand {
+public class ListCmd extends AbstractFsCommand {
 
     public ListCmd(String args) {
         super(args);
@@ -20,16 +21,9 @@ public class ListCmd extends AbstractCommand {
     }
 
     @Override
-    protected String validate(Session s) {
-        return s.isAuthed()
-                ? null
-                : ResponseDirector.singleOK(530, "Please login").toString();
-    }
-
-    @Override
-    protected String doExec(Session s) {
+    protected String doOnPath(Session s, Path target) {
         try {
-            List<String> lines = Files.list(s.cwd())
+            List<String> lines = Files.list(target)
                     .map(p -> {
                         try {
                             return (Files.isDirectory(p) ? "d" : "-") + " " + p.getFileName() + " " + Files.size(p);

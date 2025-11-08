@@ -3,7 +3,7 @@ package cmd;
 import core.Session;
 import protocol.ResponseDirector;
 
-public class QuitCmd extends AbstractCommand {
+public class QuitCmd extends PublicCommand {
 
     public QuitCmd(String args) {
         super(args);

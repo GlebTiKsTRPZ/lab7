@@ -3,7 +3,7 @@ package cmd;
 import core.Session;
 import protocol.ResponseDirector;
 
-public class UnknownCmd extends AbstractCommand {
+public class UnknownCmd extends PublicCommand {
 
     private final String n;
 

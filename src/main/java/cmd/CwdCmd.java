@@ -5,7 +5,7 @@ import java.nio.file.Path;
 import core.Session;
 import protocol.ResponseDirector;
 
-public class CwdCmd extends AbstractCommand {
+public class CwdCmd extends AbstractFsCommand {
 
     public CwdCmd(String args) {
         super(args);
@@ -17,8 +17,11 @@ public class CwdCmd extends AbstractCommand {
     }
 
     @Override
-    protected String doExec(Session s) {
-        String p = args.isBlank() ? "." : args.trim();
-        return s.changeDir(Path.of(p)) ? ResponseDirector.singleOK(250, "Directory changed").toString() : ResponseDirector.singleOK(550, "Failed to change directory").toString();
+    protected String doOnPath(Session s, Path target) {
+        boolean ok = s.changeDir(target);
+        return ok
+            ? ResponseDirector.singleOK(250, "Directory successfully changed").toString()
+            : ResponseDirector.singleOK(550, "Failed to change directory").toString();
     }
+}
 }
