@@ -24,4 +24,3 @@ public class CwdCmd extends AbstractFsCommand {
             : ResponseDirector.singleOK(550, "Failed to change directory").toString();
     }
 }
-}
